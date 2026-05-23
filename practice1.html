@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="practice1.css">
+</head>
+<body>
+    <div id="app">
+        <div class="game">
+            <div
+                class="cell"
+                v-for="(cell, index) in cells"
+                :key="index"
+                @click="onClickCell(index)"
+            >
+                <span v-if="cell == 1">❌</span>
+                <span v-if="cell == 2">⭕</span>
+            </div>
+        </div>
+        <button
+            @click="clearGame"
+        >Очистить</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="practice1.js"></script>
+</body>
+</html>
