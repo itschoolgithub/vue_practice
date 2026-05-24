@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="practice2.css">
+</head>
+<body>
+    <div id="app">
+        <button
+            class="btn"
+            @click="startGame(false)"
+            v-if="!gamePlaying && !gameFinished"
+        >Начать игру (простой)</button>
+        <button
+            class="btn"
+            @click="startGame(true)"
+            v-if="!gamePlaying && !gameFinished"
+        >Начать игру (сложный)</button>
+        <h3
+            v-if="gamePlaying || gameFinished"
+        >Ваш счет: <span>{{ scores }}</span></h3>
+        <h3
+            v-if="gamePlaying"
+        >Оставшееся время: <span>{{ leftTime }}</span> секунд</h3>
+        <div class="field" v-if="gamePlaying">
+            <div
+                class="cell"
+                v-for="(cell, index) in cells"
+                :key="index"
+                @click="onClickCell(index)"
+            >
+                <span v-if="cell == 1">👽</span>
+                <span v-if="cell == 2">💥</span>
+                <span v-if="cell == 3">🦝</span>
+                <span v-if="cell == 4">💀</span>
+            </div>
+        </div>
+        <button
+            class="btn btn-danger"
+            @click="restartGame"
+            v-if="gameFinished"
+        >Начать заново</button>
+    </div>
+    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+    <script src="practice2.js"></script>
+</body>
+</html>
