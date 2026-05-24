@@ -78,7 +78,7 @@ const config = {
             this.cells[index] = this.getTypeMob();
         },
         getTypeMob() {
-            let chance = Math.floor(Math.random()*2)
+            let chance = Math.floor(Math.random()*3)
             // 1 к 3, что выпадет енот
             if (chance == 2) {
                 return 3;
