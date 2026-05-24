@@ -6,9 +6,10 @@ const config = {
             leftTime: null,
             tickNumber: 0,
             scores: 0,
-            cells: [0, 0, 0, 0, 0, 0, 0, 0, 0],
+            cells: [],
             prevCell: null,
-            hardMode: false
+            hardMode: false,
+            n: 4
         };
     },
     methods: {
@@ -23,7 +24,7 @@ const config = {
             this.clearField();
 
             // запускам первый тик
-            setTimeout(this.tick, 100);
+            this.tick();
         },
         restartGame() {
             // начать игру заново
@@ -31,14 +32,20 @@ const config = {
             this.startGame();
         },
         clearField() {
+            this.cells = [];
+            for (let i = 0; i < this.n; i++) {
+                for (let j = 0; j < this.n; j++) {
+                    this.cells.push(0);
+                }
+            }
             // очистка поля
-            this.cells = [0, 0, 0, 0, 0, 0, 0, 0, 0];
+            // this.cells = [0, 0, 0, 0, 0, 0, 0, 0, 0];
         },
         tick() {
             // увеличиваем тик на 1
             this.tickNumber++;
 
-            if (this.tickNumber == 5) {
+            if (this.tickNumber == 1) {
                 if (this.hardMode) {
                     // если прошло 5 тиков и это тяжелый режим
                     // спавним моба
@@ -46,7 +53,7 @@ const config = {
                 }
             }
 
-            if (this.tickNumber >= 10) {
+            if (this.tickNumber >= 2) {
                 // если прошло 10 тиков (т.е. секунда)
                 this.leftTime--;
                 this.tickNumber = 0;
@@ -61,13 +68,13 @@ const config = {
             }
             
             // снова вызываем Тик
-            setTimeout(this.tick, 100);
+            setTimeout(this.tick, 500);
         },
         spaunMob() {
             // очищаем поле
             this.clearField();
             // получаем рандомную клетку
-            let index = Math.floor(Math.random()*8);
+            let index = Math.floor(Math.random()*(this.n*this.n - 1));
             if (this.prevCell == index) {
                 // если выпала та же клетка, что и в прошлый раз
                 this.spaunMob();
